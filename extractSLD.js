@@ -11,6 +11,6 @@ const tldjs = require('tldjs');
 const extractSLD = (url) => {
   const parsed = tldjs.parse(url);
   const { domain } = parsed;
-  return domain ? domain.split('.')[0] : '';
+  return domain ? domain.split('.')[0].toLowerCase() : '';
 };
 module.exports = extractSLD;

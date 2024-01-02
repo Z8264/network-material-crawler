@@ -19,7 +19,8 @@ const fetchVideoInfo = async (url) => {
     switch (sld.toLowerCase()) {
       case 'bilibili':
         data = {
-          title: $('meta[name=\'title\']').attr('content').replace('_哔哩哔哩_bilibili','').trim(),
+          type: 'video',
+          title: $('meta[name=\'title\']').attr('content').replace('_哔哩哔哩_bilibili', '').trim(),
           description: $('meta[name=\'description\']').attr('content'),
           image: $('meta[itemprop=\'image\']').attr('content'),
           author: $('meta[name=\'author\']').attr('content'),
@@ -30,6 +31,7 @@ const fetchVideoInfo = async (url) => {
         break;
       default:
         data = {
+          type: '',
           title: $('meta[name=\'title\']').attr('content'),
           description: $('meta[name=\'description\']').attr('content'),
           image: $('meta[itemprop=\'image\']').attr('content'),
@@ -39,12 +41,13 @@ const fetchVideoInfo = async (url) => {
         };
     }
     data.originalUrl = url;
-    data.sld = sld.toLowerCase();
+    data.sld = sld;
     data.image = ensureHttpsUrl(data.image);
     return Promise.resolve(data);
   } catch {
     console.log('处理请求错误 Error fetching video information:', url);
     return Promise.resolve({
+      type: '',
       title: '',
       description: '',
       image: '',

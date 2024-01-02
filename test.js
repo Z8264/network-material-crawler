@@ -32,6 +32,7 @@ test('ensureHttpsUrl', async () => {
 test('bilibili', async () => {
   const videoUrl = 'https://www.bilibili.com/video/BV19c411B7Re/?spm_id_from=333.1007.tianma.1-3-3.click&vd_source=cf5528c3cb3c69d7f8398e802787f15d';
   const data = await fetchVideoInfo(videoUrl);
+  expect(data.type).toBe('video');
   expect(data.title).toBe('【爆肝】在一个区块生存300天后，会变成什么样！_我的世界');
   expect(!!data.description).toBe(true);
   expect(!!data.image).toBe(true);
@@ -44,7 +45,7 @@ test('bilibili', async () => {
 test('bilibili: no https', async () => {
   const videoUrl = 'www.bilibili.com/video/BV19c411B7Re/?spm_id_from=333.1007.tianma.1-3-3.click&vd_source=cf5528c3cb3c69d7f8398e802787f15d';
   const data = await fetchVideoInfo(videoUrl);
-
+  expect(data.type).toBe('video');
   expect(data.title).toBe('【爆肝】在一个区块生存300天后，会变成什么样！_我的世界');
   expect(!!data.description).toBe(true);
   expect(!!data.image).toBe(true);
@@ -57,7 +58,7 @@ test('bilibili: no https', async () => {
 test('error url', async () => {
   const videoUrl = 'errorUrl';
   const data = await fetchVideoInfo(videoUrl);
-
+  expect(data.type).toBe('');
   expect(data.title).toBe('');
   expect(data.description).toBe('');
   expect(data.image).toBe('');

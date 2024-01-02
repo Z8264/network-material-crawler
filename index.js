@@ -19,7 +19,7 @@ const fetchVideoInfo = async (url) => {
     switch (sld.toLowerCase()) {
       case 'bilibili':
         data = {
-          title: $('meta[name=\'title\']').attr('content'),
+          title: $('meta[name=\'title\']').attr('content').replace('_哔哩哔哩_bilibili','').trim(),
           description: $('meta[name=\'description\']').attr('content'),
           image: $('meta[itemprop=\'image\']').attr('content'),
           author: $('meta[name=\'author\']').attr('content'),
